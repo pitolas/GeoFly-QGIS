@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 — 2026-10-10
+
+- Correção de segurança para publicação no repositório oficial do QGIS.
+- Removida a importação não utilizada `xml.sax.saxutils.escape`, sinalizada pelo Bandit.
+- Nenhuma alteração funcional no planejamento de voo, acompanhamento de terreno, cálculos, interface ou exportação KMZ DJI Fly.
+
 ## 1.0.0 — 2026-10-10
 
 Primeira versão pública estável preparada para distribuição pelo repositório oficial de plugins do QGIS.

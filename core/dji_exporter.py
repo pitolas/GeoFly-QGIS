@@ -1,7 +1,6 @@
 import os
 import time
 import zipfile
-from xml.sax.saxutils import escape
 
 MAX_WAYPOINTS_PER_KMZ = 200
 WPML_NS = "http://www.dji.com/wpmz/1.0.6"
