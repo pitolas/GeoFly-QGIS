@@ -25,10 +25,10 @@ Contato: **arminipitolas@gmail.com**
 - Voo simples ou **voo cruzado (+90°)**.
 - Cálculo de **pegada da câmera, espaçamento entre linhas, espaçamento entre fotos e GSD estimado**.
 - Perfis disponíveis no seletor:
-  - DJI Mini 5 Pro — 12 MP / 50 MP;
+  - DJI Mini 5 Pro — 12 MP / 50 MP - por enquanto apenas planejamento;
   - DJI Mini 4 Pro — 12 MP / 48 MP;
-  - DJI Mini 3 Pro — 12 MP / 48 MP;
-  - DJI Lito X1 — 12 MP / 48 MP.
+  - DJI Mini 3 Pro — 12 MP / 48 MP - por enquanto apenas planejamento;
+  - DJI Lito X1 — 12 MP / 48 MP - por enquanto apenas planejamento.
 - Acompanhamento de terreno usando **qualquer raster MDE/MDT carregado no QGIS**.
 - Criação de camadas temporárias no grupo **GeoFly**:
   - Linhas de voo;
