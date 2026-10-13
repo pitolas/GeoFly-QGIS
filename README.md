@@ -6,6 +6,13 @@
 
 Ele gera linhas de voo e waypoints a partir de um polígono selecionado, calcula parâmetros fotogramétricos por perfil de câmera, pode acompanhar o relevo usando um MDE/MDT carregado no projeto e exporta missões em **KMZ compatível com DJI Fly** para os perfis de exportação habilitados.
 
+## Perfis DJI Fly nativos
+
+A partir da v1.2.1, o GeoFly QGIS possui um exportador específico baseado em arquivos KMZ produzidos pelo próprio DJI Fly para **DJI Mini 5 Pro**, **DJI Mini 3 Pro**, **DJI Lito X1** e **DJI Lito 1**. Esses modelos usam `wpmz/template.kml` e `wpmz/waylines.wpml`, namespace `http://www.uav.com/wpmz/1.0.2` e `droneEnumValue=68`.
+
+O perfil do **DJI Mini 4 Pro não foi alterado**, pois já foi validado em campo no GeoFly. Os novos perfis devem ser testados primeiro em missão curta e área aberta.
+
+
 ## Autor
 
 **Pítolas Armini B. da Silva**  
@@ -25,10 +32,10 @@ Contato: **arminipitolas@gmail.com**
 - Voo simples ou **voo cruzado (+90°)**.
 - Cálculo de **pegada da câmera, espaçamento entre linhas, espaçamento entre fotos e GSD estimado**.
 - Perfis disponíveis no seletor:
-  - DJI Mini 5 Pro — 12 MP / 50 MP - por enquanto apenas planejamento;
+  - DJI Mini 5 Pro — 12 MP / 50 MP;
   - DJI Mini 4 Pro — 12 MP / 48 MP;
-  - DJI Mini 3 Pro — 12 MP / 48 MP - por enquanto apenas planejamento;
-  - DJI Lito X1 — 12 MP / 48 MP - por enquanto apenas planejamento.
+  - DJI Mini 3 Pro — 12 MP / 48 MP;
+  - DJI Lito X1 — 12 MP / 48 MP.
 - Acompanhamento de terreno usando **qualquer raster MDE/MDT carregado no QGIS**.
 - Criação de camadas temporárias no grupo **GeoFly**:
   - Linhas de voo;
@@ -157,3 +164,13 @@ Ao relatar um problema, informe, quando possível:
 ## Licença
 
 GeoFly QGIS é distribuído sob a licença **GNU General Public License v2.0**.
+
+## Perfis de exportação DJI Fly
+
+- **DJI Mini 4 Pro:** perfil validado em campo no GeoFly QGIS.
+- **DJI Mini 5 Pro:** exportação experimental; validar com missão curta antes do uso operacional.
+- **DJI Lito X1:** exportação experimental; validar com missão curta antes do uso operacional.
+- **DJI Mini 3 Pro:** formato nativo DJI Fly confirmado por KMZ de referência; execução GeoFly ainda deve ser validada com missão curta antes do uso operacional.
+
+Os perfis experimentais exibem um aviso de confirmação antes de gerar o KMZ. O perfil do Mini 4 Pro não foi alterado.
+

@@ -68,7 +68,7 @@ class GeoFlyDock(QDockWidget):
         root = QWidget()
         lay = QVBoxLayout(root)
 
-        intro = QLabel("v1.0.0 — polígono selecionado → malha → relevo → KMZ DJI")
+        intro = QLabel("v1.1.0 — polígono selecionado → malha → relevo → KMZ DJI")
         intro.setWordWrap(True)
         lay.addWidget(intro)
 
@@ -384,16 +384,27 @@ class GeoFlyDock(QDockWidget):
             if not self.waypoints:
                 raise ValueError("Gere uma missão antes de exportar.")
             profile = self._camera_profile()
-            if profile.get("export_family") != "mini4pro_djifly":
+            dji_profile = profile.get("dji_profile")
+            if not dji_profile:
                 QMessageBox.warning(
                     self,
-                    "GeoFly — exportação ainda não validada",
-                    f'O planejamento para {profile["drone"]} está disponível, mas a exportação KMZ desta versão '
-                    'foi validada em campo somente para DJI Mini 4 Pro / DJI Fly. '
-                    'Não vou gerar um KMZ com identificadores de aeronave incorretos. '
-                    'Para Mini 5 Pro e Lito X1, o planejamento/cálculos estão disponíveis, mas a exportação será liberada após validação do perfil DJI Fly específico.'
+                    "GeoFly — exportação indisponível",
+                    f'Não há perfil de exportação DJI Fly configurado para {profile["drone"]}.'
                 )
                 return
+            if profile.get("export_family") in ("djifly_experimental", "djifly_native_experimental"):
+                answer = QMessageBox.question(
+                    self,
+                    "GeoFly — perfil DJI Fly experimental",
+                    f'A exportação para {profile["drone"]} ainda não foi validada em campo no GeoFly QGIS.\n\n'
+                    'O KMZ será gerado com um perfil DJI Fly experimental baseado no formato nativo deste modelo. Faça primeiro uma missão curta, '
+                    'em área aberta e com poucos waypoints, e confira cuidadosamente altitude, Home, trajetória, '
+                    'gimbal e ações antes de executar.\n\nDeseja gerar o KMZ mesmo assim?',
+                    QMessageBox.Yes | QMessageBox.No,
+                    QMessageBox.No,
+                )
+                if answer != QMessageBox.Yes:
+                    return
             path, _ = QFileDialog.getSaveFileName(self, "Salvar KMZ DJI", "Missao_GeoFly_QGIS.kmz", "KMZ (*.kmz)")
             if not path:
                 return
@@ -409,7 +420,7 @@ class GeoFlyDock(QDockWidget):
                     "lon": p.x(), "lat": p.y(), "execute_h": float(wp["execute_h"]),
                     "photo": bool(wp.get("photo")),
                 })
-            outputs = export_kmz(path, data, self.altitude.value(), self.speed.value(), self.gimbal.value())
+            outputs = export_kmz(path, data, self.altitude.value(), self.speed.value(), self.gimbal.value(), dji_profile=dji_profile)
             QMessageBox.information(self, "GeoFly", "KMZ gerado:\n" + "\n".join(outputs))
             self.lbl_status.setText(f"Exportação concluída: {len(outputs)} arquivo(s) KMZ.")
         except Exception as exc:
