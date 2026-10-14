@@ -20,6 +20,7 @@ from qgis.PyQt.QtWidgets import (
     QWidget,
 )
 from qgis.core import (
+    Qgis,
     QgsCoordinateReferenceSystem,
     QgsCoordinateTransform,
     QgsFeature,
@@ -207,7 +208,7 @@ class GeoFlyDock(QDockWidget):
         if layer is None or not isinstance(layer, QgsVectorLayer):
             QMessageBox.warning(self, "GeoFly", "Ative uma camada vetorial de polígonos.")
             return
-        if QgsWkbTypes.geometryType(layer.wkbType()) != QgsWkbTypes.PolygonGeometry:
+        if QgsWkbTypes.geometryType(layer.wkbType()) != Qgis.GeometryType.Polygon:
             QMessageBox.warning(self, "GeoFly", "A camada ativa precisa ser de polígonos.")
             return
         selected = layer.selectedFeatures()
@@ -392,19 +393,6 @@ class GeoFlyDock(QDockWidget):
                     f'Não há perfil de exportação DJI Fly configurado para {profile["drone"]}.'
                 )
                 return
-            if profile.get("export_family") in ("djifly_experimental", "djifly_native_experimental"):
-                answer = QMessageBox.question(
-                    self,
-                    "GeoFly — perfil DJI Fly experimental",
-                    f'A exportação para {profile["drone"]} ainda não foi validada em campo no GeoFly QGIS.\n\n'
-                    'O KMZ será gerado com um perfil DJI Fly experimental baseado no formato nativo deste modelo. Faça primeiro uma missão curta, '
-                    'em área aberta e com poucos waypoints, e confira cuidadosamente altitude, Home, trajetória, '
-                    'gimbal e ações antes de executar.\n\nDeseja gerar o KMZ mesmo assim?',
-                    QMessageBox.Yes | QMessageBox.No,
-                    QMessageBox.No,
-                )
-                if answer != QMessageBox.Yes:
-                    return
             path, _ = QFileDialog.getSaveFileName(self, "Salvar KMZ DJI", "Missao_GeoFly_QGIS.kmz", "KMZ (*.kmz)")
             if not path:
                 return

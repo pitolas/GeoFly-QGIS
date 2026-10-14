@@ -1,4 +1,4 @@
-from qgis.core import QgsCoordinateTransform, QgsPointXY, QgsProject, QgsRaster
+from qgis.core import Qgis, QgsCoordinateTransform, QgsPointXY, QgsProject
 
 
 def sample_raster(raster_layer, point, point_crs):
@@ -7,7 +7,7 @@ def sample_raster(raster_layer, point, point_crs):
     pt = QgsPointXY(point)
     if point_crs != raster_layer.crs():
         pt = QgsCoordinateTransform(point_crs, raster_layer.crs(), QgsProject.instance()).transform(pt)
-    result = raster_layer.dataProvider().identify(pt, QgsRaster.IdentifyFormatValue)
+    result = raster_layer.dataProvider().identify(pt, Qgis.RasterIdentifyFormat.Value)
     if not result.isValid():
         raise ValueError("Não foi possível obter a cota do raster neste ponto.")
     values = result.results()

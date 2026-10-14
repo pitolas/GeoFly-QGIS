@@ -21,7 +21,7 @@ class GeoFlyPlugin:
         self.iface.addPluginToMenu("&GeoFly", self.action)
 
         self.dock = GeoFlyDock(self.iface, self.iface.mainWindow())
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.dock)
+        self.iface.addDockWidget(Qt.DockWidgetArea.RightDockWidgetArea, self.dock)
         self.dock.hide()
         self.dock.visibilityChanged.connect(self.action.setChecked)
 

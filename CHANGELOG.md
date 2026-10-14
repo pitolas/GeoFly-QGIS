@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.2 — 2026-10-14
+
+- Compatibilidade Qt6/QGIS: enums atualizados para a sintaxe escopada exigida pelo verificador oficial.
+- Corrigidos usos de `Qgis.GeometryType`, `Qgis.DistanceUnit`, `Qgis.RasterIdentifyFormat` e `Qt.DockWidgetArea`.
+- Removida a confirmação de “perfil experimental” na exportação dos modelos com formato KMZ nativo confirmado pelo DJI Fly.
+- Mensagens e documentação de compatibilidade DJI Fly revisadas.
+- Nenhuma alteração na geometria da malha, GSD, acompanhamento de relevo, divisão de waypoints, ações de fotografia ou estrutura dos exportadores DJI Fly.
+
 ## 1.2.1
 
 - Analisado KMZ nativo gerado pelo DJI Fly para DJI Mini 3 Pro.

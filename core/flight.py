@@ -1,17 +1,17 @@
 import math
 from qgis.core import (
+    Qgis,
     QgsCoordinateReferenceSystem,
     QgsCoordinateTransform,
     QgsGeometry,
     QgsPointXY,
     QgsProject,
-    QgsUnitTypes,
     QgsWkbTypes,
 )
 
 
 def metric_crs_for_geometry(geom: QgsGeometry, source_crs: QgsCoordinateReferenceSystem):
-    if source_crs.mapUnits() == QgsUnitTypes.DistanceMeters:
+    if source_crs.mapUnits() == Qgis.DistanceUnit.Meters:
         return source_crs
 
     wgs84 = QgsCoordinateReferenceSystem("EPSG:4326")
@@ -41,7 +41,7 @@ def _line_parts(geom: QgsGeometry):
     if geom is None or geom.isEmpty():
         return []
     gtype = QgsWkbTypes.geometryType(geom.wkbType())
-    if gtype != QgsWkbTypes.LineGeometry:
+    if gtype != Qgis.GeometryType.Line:
         return []
     if QgsWkbTypes.isMultiType(geom.wkbType()):
         return [p for p in geom.asMultiPolyline() if len(p) >= 2]

@@ -168,8 +168,8 @@ GeoFly QGIS é distribuído sob a licença **GNU General Public License v2.0**.
 ## Perfis de exportação DJI Fly
 
 - **DJI Mini 4 Pro:** perfil validado em campo no GeoFly QGIS.
-- **DJI Mini 5 Pro:** exportação experimental; validar com missão curta antes do uso operacional.
-- **DJI Lito X1:** exportação experimental; validar com missão curta antes do uso operacional.
+- **DJI Mini 5 Pro:** exportação DJI Fly baseada em KMZ nativo do respectivo modelo.
+- **DJI Lito X1:** exportação DJI Fly baseada em KMZ nativo do respectivo modelo.
 - **DJI Mini 3 Pro:** formato nativo DJI Fly confirmado por KMZ de referência; execução GeoFly ainda deve ser validada com missão curta antes do uso operacional.
 
 Os perfis experimentais exibem um aviso de confirmação antes de gerar o KMZ. O perfil do Mini 4 Pro não foi alterado.
